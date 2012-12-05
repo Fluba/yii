@@ -266,19 +266,25 @@ EOD;
 	protected function registerClientScript()
 	{
 		$js=array();
-		foreach($this->buttons as $id=>$button)
-		{
-			if(isset($button['click']))
-			{
-				$function=CJavaScript::encode($button['click']);
-				$class=preg_replace('/\s+/','.',$button['options']['class']);
-				$js[]="jQuery(document).on('click','#{$this->grid->id} a.{$class}',$function);";
-			}
-		}
 
-		if($js!==array())
-			Yii::app()->getClientScript()->registerScript(__CLASS__.'#'.$this->id, implode("\n",$js));
-	}
+        foreach($this->buttons as $id=>$button)
+        {
+            if(isset($button['click']))
+            {
+                $function=CJavaScript::encode($button['click']);
+                $class=preg_replace('/\s+/','.',$button['options']['class']);
+                $js[]="if(typeof(_gridf)==='undefined'){_gridf={};}"
+                ."if(typeof(_gridf['on-{$this->grid->id}-{$class}'])!=='undefined') {jQuery(document).off('click','#{$this->grid->id} a.{$class}',_gridf['on-{$this->grid->id}-{$class}']);}"
+                ."_gridf['on-{$this->grid->id}-{$class}']=$function;"
+                ."jQuery(document).on('click','#{$this->grid->id} a.{$class}',_gridf['on-{$this->grid->id}-{$class}']);";
+
+                        }
+        }
+
+        if($js!==array())
+            Yii::app()->getClientScript()->registerScript(__CLASS__.'#'.$this->id, implode("\n",$js));
+
+    }
 
 	/**
 	 * Renders the data cell content.
