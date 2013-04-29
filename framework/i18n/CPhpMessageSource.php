@@ -61,8 +61,24 @@ class CPhpMessageSource extends CMessageSource
 	 * the "messages" subdirectory of the application directory (e.g. "protected/messages").
 	 */
 	public $basePath;
+    /**
+    * @var array the messages path for extensions.
+    * The format of the array should be:
+    * <pre>
+    * array(
+    * 'ExtensionName' => 'ext.ExtensionName.messages',
+    * )
+    * </pre>
+    * Where the key is the name of the extension and the value is the alias to the path
+    * of the "messages" subdirectory of the extension.
+    * When using Yii::t() to translate an extension message, the category name should be
+    * set as 'ExtensionName.categoryName'.
+    * Defaults to an empty array, meaning no extensions registered.
+    * @since 1.1.9
+    */
+    public $extensionBasePaths=array();
 
-	private $_files=array();
+    private $_files=array();
 
 	/**
 	 * Initializes the application component.
