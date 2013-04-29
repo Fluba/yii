@@ -4,7 +4,7 @@
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @link http://www.yiiframework.com/
- * @copyright Copyright &copy; 2008-2011 Yii Software LLC
+ * @copyright 2008-2013 Yii Software LLC
  * @license http://www.yiiframework.com/license/
  */
 
@@ -87,7 +87,7 @@ class CCheckBoxColumn extends CGridColumn
 	 * <li>null - {@link CGridView::selectableRows} is used to control how many checkboxes can be checked.
 	 * Checking a checkbox will also select the row.</li>
 	 * </ul>
-	 * You may also call the JavaScript function <code>$(gridID).yiiGridView.('getChecked', columnID)</code>
+	 * You may also call the JavaScript function <code>$(gridID).yiiGridView('getChecked', columnID)</code>
 	 * to retrieve the key values of the checked rows.
 	 * @since 1.1.6
 	 */
